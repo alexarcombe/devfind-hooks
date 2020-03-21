@@ -2,9 +2,13 @@ img {
   width: 100%;
 }
 
+.app {
+  margin-top: 80px;
+}
+
 .landing {
   position: relative;
-  background: url("./img/showcase.jpg") no-repeat;
+  background: url('./img/showcase.jpg') no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -36,4 +40,8 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.input-group-text {
+  width: 42px;
 }

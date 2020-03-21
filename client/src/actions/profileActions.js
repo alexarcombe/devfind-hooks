@@ -4,153 +4,153 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  SET_USER
+  SET_USER,
 } from './types';
 import axios from 'axios';
 
-const createProfile = (profileData, history) => dispatch => {
+const createProfile = (profileData, history) => (dispatch) => {
   axios
     .post('api/profile', profileData)
-    .then(res => history.push('/dashboard'))
-    .catch(err =>
+    .then((res) => history.push('/dashboard'))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
-const deleteAccount = () => dispatch => {
+const deleteAccount = () => (dispatch) => {
   if (window.confirm('Are you sure? This can NOT be undone!')) {
     axios
       .delete('/api/profile')
-      .then(res =>
+      .then((res) =>
         dispatch({
           type: SET_USER,
-          payload: {}
+          payload: {},
         })
       )
-      .catch(err =>
+      .catch((err) =>
         dispatch({
           type: GET_ERRORS,
-          payload: err.response.data
+          payload: err.response.data,
         })
       );
   }
 };
 
-const getCurrentProfile = () => dispatch => {
+const getCurrentProfile = () => (dispatch) => {
   dispatch(setProfileLoading());
 
   axios
     .get('/api/profile')
-    .then(res => {
+    .then((res) => {
       dispatch({ type: GET_PROFILE, payload: res.data });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch({ type: GET_PROFILE, payload: {} });
     });
 };
 
-const getProfileByHandle = handle => dispatch => {
+const getProfileByHandle = (handle) => (dispatch) => {
   dispatch(setProfileLoading());
 
   axios
     .get(`/api/profile/handle/${handle}`)
-    .then(res => {
+    .then((res) => {
       dispatch({ type: GET_PROFILE, payload: res.data });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch({ type: GET_PROFILE, payload: {} });
     });
 };
 
-const getAllProfiles = () => dispatch => {
+const getAllProfiles = () => (dispatch) => {
   dispatch(setProfileLoading());
 
   axios
     .get('/api/profile/all')
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILES,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PROFILES,
-        payload: null
+        payload: null,
       })
     );
 };
 
-const addExperience = (experience, history) => dispatch => {
+const addExperience = (experience, history) => (dispatch) => {
   axios
     .post('api/profile/experience', experience)
-    .then(res => history.push('/dashboard'))
-    .catch(err =>
+    .then((res) => history.push('/dashboard'))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
-const addEducation = (education, history) => dispatch => {
+const addEducation = (education, history) => (dispatch) => {
   axios
     .post('api/profile/education', education)
-    .then(res => history.push('/dashboard'))
-    .catch(err =>
+    .then((res) => history.push('/dashboard'))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
-const deleteExperience = expID => dispatch => {
+const deleteExperience = (expID) => (dispatch) => {
   axios
     .delete(`api/profile/experience/${expID}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
-const deleteEducation = eduId => dispatch => {
+const deleteEducation = (eduId) => (dispatch) => {
   axios
     .delete(`api/profile/education/${eduId}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 const setProfileLoading = () => {
   return {
-    type: PROFILE_LOADING
+    type: PROFILE_LOADING,
   };
 };
 
 const clearProfile = () => {
   return {
-    type: CLEAR_CURRENT_PROFILE
+    type: CLEAR_CURRENT_PROFILE,
   };
 };
 
@@ -164,5 +164,5 @@ export {
   deleteExperience,
   deleteEducation,
   getAllProfiles,
-  getProfileByHandle
+  getProfileByHandle,
 };

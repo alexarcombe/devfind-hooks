@@ -5,6 +5,8 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { SET_USER, CLEAR_CURRENT_PROFILE } from './actions/types';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import store from './store';
 
 // css
@@ -24,10 +26,10 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddExperience from './components/add-info/AddExperience';
 import AddEducation from './components/add-info/AddEducation';
-import Profiles from './components/Profiles/Profiles';
-import Profile from './components/Profile/Profile';
-import Posts from './components/Posts/Posts';
-import Post from './components/Post/Post';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -39,7 +41,7 @@ if (localStorage.jwtToken) {
 
   store.dispatch({
     type: SET_USER,
-    payload: decoded
+    payload: decoded,
   });
 
   if (decoded.exp < currentTime) {
@@ -53,7 +55,7 @@ if (localStorage.jwtToken) {
     store.dispatch({ type: SET_USER, payload: {} });
 
     store.dispatch({
-      type: CLEAR_CURRENT_PROFILE
+      type: CLEAR_CURRENT_PROFILE,
     });
     window.location.href = '/login';
 
@@ -65,7 +67,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div>
+        <div className="app">
           <Navbar />
           <Route exact path="/" component={Landing} />
           <div className="container">
